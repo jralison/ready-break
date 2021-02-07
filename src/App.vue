@@ -5,13 +5,14 @@
       color="primary"
       dark
       dense
+      clipped-left
     >
       <div class="d-flex align-center">
         <v-img
           alt="Ícone ReadyBreak"
           class="shrink mr-2"
           contain
-          :src="logo"
+          src="./assets/logo.svg"
           transition="scale-transition"
           width="32"
         />
@@ -21,7 +22,7 @@
           class="shrink hidden-sm-and-down"
           contain
           max-width="150"
-          :src="logoName"
+          src="./assets/ready-break-name.svg"
         />
       </div>
     </v-app-bar>
@@ -33,11 +34,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
 import Editor from '@/components/Editor.vue'
-
-import Logo from './assets/logo.svg'
-import LogoName from './assets/ready-break-name.svg'
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
   components: {
@@ -45,7 +43,6 @@ import LogoName from './assets/ready-break-name.svg'
   },
 })
 export default class App extends Vue {
-  logo = Logo
-  logoName = LogoName
+  //
 }
 </script>

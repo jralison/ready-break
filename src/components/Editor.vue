@@ -285,15 +285,16 @@ export default class Editor extends Vue {
     }
   }
 
-  private desenharGuias(doc: jsPDF): jsPDF {
+  private desenharGuias(doc: jsPDF): void {
     const precisao = 1e1
 
-    const regua = { cor: '#ffadad', padrao: [1.25, .5] }
-    const retangulo = { cor: '#bde0fe', padrao: [] }
+    const regua = { cor: `${this.$vuetify.theme.currentTheme.accent}`, padrao: [1.25, .5] }
+    const retangulo = { cor: `${this.$vuetify.theme.currentTheme.info}`, padrao: [] }
 
     const avancoHorizontal = (this.tamanhoNotaAdesiva.largura + this.espacamentoEntreNotas.x)
     const avancoVertical = (this.tamanhoNotaAdesiva.altura + this.espacamentoEntreNotas.y)
 
+    doc.setTextColor(regua.cor)
     doc.setLineWidth(0.3)
 
     for (let linha = 0; linha < this.notasPorColuna; linha++) {
@@ -301,9 +302,8 @@ export default class Editor extends Vue {
         const x = (this.origemFinal.x + (avancoHorizontal * coluna))
         const y = (this.origemFinal.y + (avancoVertical * linha))
 
-        doc.setTextColor(regua.cor)
         doc.setDrawColor(retangulo.cor)
-        doc.setLineDashPattern(retangulo.padrao)
+        doc.setLineDashPattern(retangulo.padrao, 0)
         doc.rect(x, y, this.tamanhoNotaAdesiva.largura, this.tamanhoNotaAdesiva.altura)
 
         doc.setFontSize(9)
@@ -318,7 +318,7 @@ export default class Editor extends Vue {
           const reguaX = (x - this.espacamentoEntreNotas.x)
           const distancia = Math.round((precisao * (x - reguaX)) / precisao)
           doc.setDrawColor(regua.cor)
-          doc.setLineDashPattern(regua.padrao)
+          doc.setLineDashPattern(regua.padrao, 0)
           doc.line(reguaX, y, x, y)
           doc.setFontSize(8)
           doc.text(`${distancia} mm`, (reguaX + (distancia / 2)), (y - 1), { align: 'center' })
@@ -328,7 +328,7 @@ export default class Editor extends Vue {
           const reguaY = (y - this.espacamentoEntreNotas.y)
           const distancia = Math.round((precisao * (y - reguaY)) / precisao)
           doc.setDrawColor(regua.cor)
-          doc.setLineDashPattern(regua.padrao)
+          doc.setLineDashPattern(regua.padrao, 0)
           doc.line(x, y, x, (y - this.espacamentoEntreNotas.y))
           doc.setFontSize(8)
           doc.text(`${distancia} mm`, x, (y - this.espacamentoEntreNotas.y), { align: 'center', angle: -90 })
@@ -341,7 +341,7 @@ export default class Editor extends Vue {
     const distanciaY = this.origemFinal.y
     doc.setFontSize(8)
     doc.setDrawColor(regua.cor)
-    doc.setLineDashPattern(regua.padrao)
+    doc.setLineDashPattern(regua.padrao, 0)
     doc.line(0, this.origemFinal.y, this.origemFinal.x, this.origemFinal.y)
     doc.text(`${distanciaX} mm`, (distanciaX / 2), (this.origemFinal.y - 1), { align: 'center' })
     doc.line(this.origemFinal.x, 0, this.origemFinal.x, this.origemFinal.y)
