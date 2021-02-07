@@ -4,58 +4,48 @@
       app
       color="primary"
       dark
+      dense
     >
       <div class="d-flex align-center">
         <v-img
-          alt="Vuetify Logo"
+          alt="Ícone ReadyBreak"
           class="shrink mr-2"
           contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          :src="logo"
           transition="scale-transition"
-          width="40"
+          width="32"
         />
 
         <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
+          alt="Nome ReadyBreak"
+          class="shrink hidden-sm-and-down"
           contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
+          max-width="150"
+          :src="logoName"
         />
       </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
     </v-app-bar>
 
     <v-main>
-      <HelloWorld />
+      <Editor />
     </v-main>
   </v-app>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
+import { Component, Vue } from 'vue-property-decorator'
+import Editor from '@/components/Editor.vue'
 
-export default Vue.extend({
-  name: 'App',
+import Logo from './assets/logo.svg'
+import LogoName from './assets/ready-break-name.svg'
 
+@Component({
   components: {
-    HelloWorld,
+    Editor,
   },
-
-  data: () => ({
-    //
-  }),
 })
+export default class App extends Vue {
+  logo = Logo
+  logoName = LogoName
+}
 </script>
