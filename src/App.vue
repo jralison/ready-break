@@ -25,6 +25,21 @@
           src="./assets/ready-break-name.svg"
         />
       </div>
+
+      <v-spacer />
+
+      <v-btn
+        href="https://jralison.com/?ref=readybreak"
+        target="_blank"
+        class="text-none"
+        text
+      >
+        <span class="font-weight-regular text--secondary">criado &lt;3 por</span>
+        <span class="font-weight-black ml-1">jralison</span>
+        <v-icon right>
+          mdi-open-in-new
+        </v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-main>
